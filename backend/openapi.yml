@@ -1,0 +1,255 @@
+openapi: 3.0.2
+info:
+  title: API Schema
+  version: ''
+  description: Guide for the REST API
+paths:
+  /orders/:
+    get:
+      summary: getAllOrders
+      operationId: listorder_lists
+      description: List of all users
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Order'
+          description: ''
+      tags:
+      - orders
+    post:
+      summary: createNewOrder
+      operationId: createorder_list
+      description: Create new order
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - orders
+  /orders/{id}:
+    get:
+      summary: getOrderById
+      operationId: retrieveorder_detail
+      description: Get order by id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Order'
+          description: ''
+      tags:
+      - orders
+    put:
+      summary: acceptOrder
+      operationId: updateorder_detail
+      description: Accept order by angel
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - orders
+
+  /users/:
+    get:
+      summary: getAllUsers
+      operationId: listusers_lists
+      description: List all code users
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - customers
+    post:
+      summary: createNewUser
+      operationId: createuser_list
+      description: Create new user
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - customers
+  /users/{id}:
+    get:
+      summary: getUserById
+      operationId: listusersbyid_lists
+      description: Get user by id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - customers
+  /users/{id}/orders:
+    get:
+      summary: getAllOrdersOfTheUser
+      operationId: listordersofuser_lists
+      description: List all user's orders
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Order'
+          description: ''
+      tags:
+      - customers
+  /users/{id}/orders/{order_id}:
+    get:
+      summary: getOrderOfUser
+      operationId: orderofuser_lists
+      description: Get user's order by id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: order_id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Order'
+          description: ''
+      tags:
+      - customers
+      
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 5
+        name:
+          type: string
+          example: John
+        phoneNumber:
+          type: integer
+          example: 88005553535
+        email:
+          type: string
+          example: mail@innopolis.ru
+      required:
+        - id
+        - name
+        - phoneNumber
+        - email
+  
+    OrderStatus:
+      description: Performing status
+      type: string
+      enum: [OFFERED, DELIVERY, PERFORMED]
+
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 4
+        description:
+          type: string
+          example: Description of the 
+        orderStatus:
+          $ref: '#/components/schemas/OrderStatus'
+        possibleDeliveryMen:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        acceptedDeliveryMen:
+          $ref: '#/components/schemas/User'
+      required:  
+        - id
+        - description
+        - orderStatus
+        - possibleDeliveryMen
+        - acceptedDeliveryMen
+  
