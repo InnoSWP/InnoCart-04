@@ -1,10 +1,21 @@
 from django.db import models
 
-# Create your models here.
 
+# Create your models here.
 class Order(models.Model):
-    customer = models.IntegerField()
-    description = models.CharField(max_length=100, blank=True, default='')
-    status = models.BooleanField(default=False)
-    acceptedDelivery = models.BooleanField(default=False)
-    deliveryMan = models.IntegerField()
+    STATUS = (
+        ('0', 'CREATED'),
+        ('1', 'IN_PROGRESS'),
+        ('2', 'COMPLETED'),
+    )
+    orderId = models.IntegerField(null=False, blank=False)
+    customerId = models.IntegerField(null=False, blank=False)
+    description = models.CharField(max_length=1000, null=True, blank=True, default='')
+    expectedDeliveryTime = models.DateField(auto_now=True, null=False, blank=False)
+    status = models.CharField(max_length=1, choices=STATUS, null=False, blank=False)
+    weight = models.DecimalField(decimal_places=2, max_digits=1000, null=False, blank=False)
+    cost = models.IntegerField(null=False, blank=False)
+    fee = models.IntegerField(null=False, blank=False)
+    address = models.CharField(max_length=200, null=False, blank=False)
+    possibleAngelsIds = models.JSONField(null=False, blank=False)
+    picture = models.URLField(null=True, blank=True, default='')

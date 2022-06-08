@@ -1,0 +1,87 @@
+Index: backend/orders/models.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from django.db import models\r\n\r\n# Create your models here.\r\n\r\nclass Order(models.Model):\r\n    customer = models.IntegerField()\r\n    description = models.CharField(max_length=100, blank=True, default='')\r\n    status = models.BooleanField(default=False)\r\n    acceptedDelivery = models.BooleanField(default=False)\r\n    deliveryMan = models.IntegerField()
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/orders/models.py b/backend/orders/models.py
+--- a/backend/orders/models.py	(revision 2ccd792be7d6adc7424cc868934eb60a6fc82974)
++++ b/backend/orders/models.py	(date 1654247412770)
+@@ -5,6 +5,8 @@
+ class Order(models.Model):
+     customer = models.IntegerField()
+     description = models.CharField(max_length=100, blank=True, default='')
+-    status = models.BooleanField(default=False)
+-    acceptedDelivery = models.BooleanField(default=False)
+-    deliveryMan = models.IntegerField()
+\ No newline at end of file
++    status = models.IntegerField()
++    deliveryMan = models.IntegerField()
++    weight = models.IntegerField()
++    customerFeedback = models.CharField(max_length=200, blank=True, default='')
++    deliveryManFeedback = models.CharField(max_length=200, blank=True, default='')
+\ No newline at end of file
+Index: backend/InnoCart/urls.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\"\"\"InnoCart URL Configuration\r\n\r\nThe `urlpatterns` list routes URLs to views. For more information please see:\r\n    https://docs.djangoproject.com/en/4.0/topics/http/urls/\r\nExamples:\r\nFunction views\r\n    1. Add an import:  from my_app import views\r\n    2. Add a URL to urlpatterns:  path('', views.home, name='home')\r\nClass-based views\r\n    1. Add an import:  from other_app.views import Home\r\n    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')\r\nIncluding another URLconf\r\n    1. Import the include() function: from django.urls import include, path\r\n    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))\r\n\"\"\"\r\nfrom django.contrib import admin\r\nfrom django.urls import path\r\nfrom rest_framework.urlpatterns import format_suffix_patterns\r\nfrom orders import views\r\n\r\nurlpatterns = [\r\n    path('admin/', admin.site.urls),\r\n    path('orders/', views.order_list),\r\n    path('orders/<int:pk>', views.order_detail),\r\n]\r\n\r\nurlpatterns = format_suffix_patterns(urlpatterns)\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/InnoCart/urls.py b/backend/InnoCart/urls.py
+--- a/backend/InnoCart/urls.py	(revision 2ccd792be7d6adc7424cc868934eb60a6fc82974)
++++ b/backend/InnoCart/urls.py	(date 1654247736574)
+@@ -18,10 +18,16 @@
+ from rest_framework.urlpatterns import format_suffix_patterns
+ from orders import views
+ 
++from rest_framework.schemas import get_schema_view
++
+ urlpatterns = [
+     path('admin/', admin.site.urls),
+     path('orders/', views.order_list),
+     path('orders/<int:pk>', views.order_detail),
++    path('api_schema/', get_schema_view(
++        title='API Schema',
++        description='Guide for the REST API'
++    ), name='api_schema'),
+ ]
+ 
+ urlpatterns = format_suffix_patterns(urlpatterns)
+Index: backend/orders/serializers.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from rest_framework import serializers\r\nfrom orders.models import Order\r\n\r\n\r\nclass OrderSerializer(serializers.Serializer):\r\n    id = serializers.IntegerField(read_only=True)\r\n    customer = serializers.IntegerField()\r\n    description = serializers.CharField(max_length=100, default='')\r\n    status = serializers.BooleanField(default=False)\r\n    acceptedDelivery = serializers.BooleanField(default=False)\r\n    deliveryMan = serializers.IntegerField()\r\n\r\n    def create(self, validated_data):\r\n        \"\"\"\r\n        Create and return a new `Snippet` instance, given the validated data.\r\n        \"\"\"\r\n        return Order.objects.create(**validated_data)\r\n\r\n    def update(self, instance, validated_data):\r\n        \"\"\"\r\n        Update and return an existing `Snippet` instance, given the validated data.\r\n        \"\"\"\r\n        instance.customer = validated_data.get('customer', instance.customer)\r\n        instance.description = validated_data.get('description', instance.description)\r\n        instance.status = validated_data.get('status', instance.status)\r\n        instance.acceptedDelivery = validated_data.get('acceptedDelivery', instance.acceptedDelivery)\r\n        instance.deliveryMan = validated_data.get('deliveryMan', instance.deliveryMan)\r\n        instance.save()\r\n        return instance
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/orders/serializers.py b/backend/orders/serializers.py
+--- a/backend/orders/serializers.py	(revision 2ccd792be7d6adc7424cc868934eb60a6fc82974)
++++ b/backend/orders/serializers.py	(date 1654247514649)
+@@ -6,9 +6,11 @@
+     id = serializers.IntegerField(read_only=True)
+     customer = serializers.IntegerField()
+     description = serializers.CharField(max_length=100, default='')
+-    status = serializers.BooleanField(default=False)
+-    acceptedDelivery = serializers.BooleanField(default=False)
++    status = serializers.IntegerField()
+     deliveryMan = serializers.IntegerField()
++    weight = serializers.IntegerField()
++    customerFeedback = serializers.CharField(max_length=200, default='')
++    deliveryManFeedback = serializers.CharField(max_length=200, default='')
+ 
+     def create(self, validated_data):
+         """
+@@ -23,7 +25,9 @@
+         instance.customer = validated_data.get('customer', instance.customer)
+         instance.description = validated_data.get('description', instance.description)
+         instance.status = validated_data.get('status', instance.status)
+-        instance.acceptedDelivery = validated_data.get('acceptedDelivery', instance.acceptedDelivery)
+         instance.deliveryMan = validated_data.get('deliveryMan', instance.deliveryMan)
++        instance.weight = validated_data.get('weight', instance.weight)
++        instance.deliveryManFeedback = validated_data.get('deliveryManFeedback', instance.deliveryManFeedback)
++        instance.customerFeedback = validated_data.get('customerFeedback', instance.customerFeedback)
+         instance.save()
+         return instance
+\ No newline at end of file
