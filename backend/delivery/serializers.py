@@ -12,15 +12,9 @@ class DeliverySerializer(serializers.Serializer):
     angelConfirmation = serializers.BooleanField()
 
     def create(self, validated_data):
-        """
-        Create and return a new `Snippet` instance, given the validated data.
-        """
         return Delivery.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        """
-        Update and return an existing `Snippet` instance, given the validated data.
-        """
         instance.customerId = validated_data.get('customerId', instance.customerId)
         instance.angelId = validated_data.get('angelId', instance.angelId)
         instance.orderId = validated_data.get('orderId', instance.orderId)
