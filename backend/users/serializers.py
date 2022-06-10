@@ -7,7 +7,7 @@ class UserSerializer(serializers.Serializer):
     userId = serializers.IntegerField()
     passwordMd5hash = serializers.CharField(max_length=300)
     name = serializers.CharField(max_length=100)
-    phoneNumber = serializers.IntegerField()
+    phoneNumber = serializers.CharField()
     email = serializers.CharField(max_length=200)
     age = serializers.IntegerField()
     deliveryRate = serializers.DecimalField(decimal_places=1, max_digits=1000)
