@@ -320,7 +320,7 @@ components:
           type: string
           example: John
         phoneNumber:
-          type: integer
+          type: string
           example: 88005553535
         email:
           type: string
@@ -350,6 +350,7 @@ components:
         - age
         - createdOrdersHistoryIds
         - deliveredOrdersHistoryIds
+        - passwordMd5hash
 
     Order:
       type: object
