@@ -4,7 +4,6 @@ from .models import User
 
 class UserSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
-    userId = serializers.IntegerField()
     passwordMd5hash = serializers.CharField(max_length=300)
     name = serializers.CharField(max_length=100)
     phoneNumber = serializers.CharField()
@@ -15,16 +14,10 @@ class UserSerializer(serializers.Serializer):
     deliveredOrdersHistoryIds = serializers.JSONField()
 
     def create(self, validated_data):
-        """
-        Create and return a new `Snippet` instance, given the validated data.
-        """
         return User.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        """
-        Update and return an existing `Snippet` instance, given the validated data.
-        """
-        instance.userId = validated_data.get('userId', instance.userId)
+        instance.id = validated_data.get('id', instance.id)
         instance.passwordMd5hash = validated_data.get('passwordMd5hash', instance.passwordMd5hash)
         instance.name = validated_data.get('name', instance.name)
         instance.phoneNumber = validated_data.get('phoneNumber', instance.phoneNumber)

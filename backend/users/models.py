@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 
 class User(models.Model):
-    userId = models.IntegerField(null=False, blank=False)
+    id = models.IntegerField(null=False, blank=False)
     passwordMd5hash = models.CharField(max_length=300, null=True, blank=True)
     name = models.CharField(max_length=100, null=False, blank=False)
     phoneNumber = models.CharField(max_length=20, null=False, blank=False)
