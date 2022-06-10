@@ -22,9 +22,9 @@ from rest_framework.schemas import get_schema_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api_schema/', get_schema_view(title='API Schema', description='Guide for the REST API'), name='api_schema'),
     path('delivery/', delivery_list, name='delivery'),
     path('delivery/<int:pk>', delivery_detail, name='delivery by id'),
-    path('api_schema/', get_schema_view(title='API Schema', description='Guide for the REST API'), name='api_schema'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
