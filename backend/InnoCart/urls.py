@@ -16,12 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
-from orders import views
+
+from rest_framework.schemas import get_schema_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('orders/', views.order_list),
-    path('orders/<int:pk>', views.order_detail),
+    path('api_schema/', get_schema_view(title='API Schema', description='Guide for the REST API'), name='api_schema'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
