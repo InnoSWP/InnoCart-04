@@ -375,10 +375,10 @@ components:
           type: number
           example: 3.5
         cost:
-          type: integer
+          type: number
           example: 1200
         fee:
-          type: integer
+          type: number
           example: 100
         address:
           type: string
