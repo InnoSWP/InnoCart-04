@@ -9,9 +9,6 @@ from .serializers import OrderSerializer
 
 @api_view(['GET', 'POST'])
 def order_list(request, format=None):
-    """
-    List all code orders, filter orders, or create a new order.
-    """
     token = request.GET.get('token')
     if token is None or token == '':
         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -49,9 +46,6 @@ def order_list(request, format=None):
 
 @api_view(['GET', 'PUT'])
 def order_detail(request, pk, format=None):
-    """
-    Retrieve or update an order.
-    """
     token = request.GET.get('token')
     if token is None or token == '':
         return Response(status=status.HTTP_400_BAD_REQUEST)

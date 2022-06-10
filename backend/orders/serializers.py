@@ -4,7 +4,6 @@ from .models import Order
 
 class OrderSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
-    orderId = serializers.IntegerField()
     customerId = serializers.IntegerField()
     description = serializers.CharField()
     expectedDeliveryTime = serializers.DateField()
@@ -17,16 +16,10 @@ class OrderSerializer(serializers.Serializer):
     picture = serializers.URLField()
 
     def create(self, validated_data):
-        """
-        Create and return a new `Snippet` instance, given the validated data.
-        """
         return Order.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        """
-        Update and return an existing `Snippet` instance, given the validated data.
-        """
-        instance.orderId = validated_data.get('orderId', instance.orderId)
+        instance.id = validated_data.get('id', instance.id)
         instance.customerId = validated_data.get('customerId', instance.customerId)
         instance.description = validated_data.get('description', instance.description)
         instance.expectedDeliveryTime = validated_data.get('expectedDeliveryTime', instance.expectedDeliveryTime)

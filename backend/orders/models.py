@@ -1,14 +1,13 @@
 from django.db import models
 
 
-# Create your models here.
 class Order(models.Model):
     STATUS = (
         ('0', 'CREATED'),
         ('1', 'IN_PROGRESS'),
         ('2', 'COMPLETED'),
     )
-    orderId = models.IntegerField(null=False, blank=False)
+    id = models.IntegerField(null=False, blank=False)
     customerId = models.IntegerField(null=False, blank=False)
     description = models.CharField(max_length=1000, null=True, blank=True, default='')
     expectedDeliveryTime = models.DateField(auto_now=True, null=False, blank=False)
