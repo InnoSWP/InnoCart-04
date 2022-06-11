@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:innocart/main.dart';
+import 'package:innocart/signup/see.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key, required this.title, required this.onTouched}) : super(key: key);
@@ -20,11 +21,19 @@ class SignUpPage extends StatefulWidget {
 }
 class _SignUpState extends State<SignUpPage> {
   bool checked = false;
+  bool customer = true;
   String email = "",password = "";
+  bool showPassword = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     double height = size.height, width = size.width;
+    Color buttonsColor1 = Color(0xffc3c3d3);
+    Color buttonsColor2 = Color(0xff3b42f0);
+    Widget o = See(onClick: (){setState((){
+      showPassword = ! showPassword;
+      });
+    });
     return Scaffold(
 
           body: SingleChildScrollView(
@@ -32,14 +41,14 @@ class _SignUpState extends State<SignUpPage> {
               child: Column (children: <Widget>[
                 Container(
                     width: width,
-                    height: height * 0.2,
+                    height: height * 0.23,
                     decoration: const BoxDecoration(
                       color : Color.fromRGBO(137, 141, 247, 1),
                     ),
                     child: Image.asset("assets/images/logo.png")
                 ),
                 const SizedBox(height: 20),
-                SizedBox(width: 0.8 * width,height: 0.65 * height,child:
+                SizedBox(width: 0.8 * width,height: 0.75 * height,child:
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -64,6 +73,55 @@ class _SignUpState extends State<SignUpPage> {
                         super.widget.onTouched();
                   }, child: Text("Log in"))
                     ]),
+                    Row(mainAxisAlignment: MainAxisAlignment.center , children: [
+                      TextButton(
+                        style: ButtonStyle(
+                          fixedSize: MaterialStateProperty.all(Size(0.38 * width,0.03 * height)),
+                          backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                                (Set<MaterialState> states) {
+                                  Color current = customer?buttonsColor2:buttonsColor1;
+                              if (states.contains(MaterialState.hovered))
+                                return current.withOpacity(0.7);
+                              if (states.contains(MaterialState.focused) ||
+                                  states.contains(MaterialState.pressed))
+                                return current.withOpacity(0.6);
+                              return current; // Defer to the widget's default.
+                            },
+                          ),
+                          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        ),
+                        onPressed: () {
+                          setState((){
+                            customer = true;
+                          });
+                        },
+                        child: Text('Customer'),
+                      ),SizedBox(width: width * 0.03),
+                      TextButton(
+                        style: ButtonStyle(
+                          fixedSize: MaterialStateProperty.all(Size(0.38 * width,0.03 * height)),
+                          backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                                (Set<MaterialState> states) {
+                                  Color current = customer?buttonsColor1:buttonsColor2;
+                                  if (states.contains(MaterialState.hovered))
+                                    return current.withOpacity(0.7);
+                                  if (states.contains(MaterialState.focused) ||
+                                      states.contains(MaterialState.pressed))
+                                    return current.withOpacity(0.6);
+                                  return current; // Defer to the widget's default.
+                                },
+                          ),
+                          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        ),
+                        onPressed: () {
+                          setState((){
+                            customer = false;
+                          });
+                        },
+                        child: Text('Angel'),
+                      )
+                    ],),
+                    SizedBox(height:20),
                     TextField(
                       obscureText: false,
                       onChanged: (String value) async{
@@ -88,6 +146,7 @@ class _SignUpState extends State<SignUpPage> {
                       decoration: const InputDecoration(
                         border: const OutlineInputBorder(),
                         labelText: 'Email',
+
                       ),
                     ),SizedBox(height:20),
                     TextField(
@@ -104,15 +163,17 @@ class _SignUpState extends State<SignUpPage> {
                       ),
                     ),SizedBox(height:20),
                     TextField(
-                      obscureText: true,
+
+                      obscureText: !showPassword,
                       onChanged: (String value) async{
 
                         setState((){
                           password = value;
                         });
                       },
-                      decoration: const InputDecoration(
-                        border: const OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        suffixIcon: o,
+                        border: OutlineInputBorder(),
                         labelText: 'Password',
                       ),
                     ),SizedBox(height:20),
@@ -142,13 +203,14 @@ class _SignUpState extends State<SignUpPage> {
                           fixedSize: MaterialStateProperty.all(Size(300,50)),
                           backgroundColor: MaterialStateProperty.resolveWith<Color?>(
                                 (Set<MaterialState> states) {
-                              if (states.contains(MaterialState.hovered))
-                                return Colors.blue.withOpacity(0.7);
-                              if (states.contains(MaterialState.focused) ||
-                                  states.contains(MaterialState.pressed))
-                                return Colors.blue.withOpacity(0.6);
-                              return Colors.blue; // Defer to the widget's default.
-                            },
+                                  Color current = buttonsColor2;
+                                  if (states.contains(MaterialState.hovered))
+                                    return current.withOpacity(0.7);
+                                  if (states.contains(MaterialState.focused) ||
+                                      states.contains(MaterialState.pressed))
+                                    return current.withOpacity(0.6);
+                                  return current; // Defer to the widget's default.
+                                },
                           ),
                           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                         ),

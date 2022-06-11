@@ -61,6 +61,8 @@ flutter:
   assets:
     - assets/icons/logo.svg
     - assets/images/logo.png
+    - assets/images/see.png
+    - assets/images/nosee.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

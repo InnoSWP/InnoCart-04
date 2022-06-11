@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 
 class LogInPage extends StatefulWidget {
-  const LogInPage({Key? key, required this.title, required this.onTouched}) : super(key: key);
+  const LogInPage({Key? key, required this.title, required this.onTouched, required this.onResetRequest}) : super(key: key);
   final Function onTouched;
+  final Function onResetRequest;
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
   // how it looks.
@@ -32,7 +33,7 @@ class _LogInState extends State<LogInPage> {
             child: Column (children: <Widget>[
               Container(
                   width: width,
-                  height: height * 0.2,
+                  height: height * 0.23,
                   decoration: const BoxDecoration(
                     color : Color.fromRGBO(137, 141, 247, 1),
                   ),
@@ -115,7 +116,7 @@ class _LogInState extends State<LogInPage> {
                   ],)
                   ,SizedBox(height:20),
                   TextButton(onPressed: () {
-                    print('test');
+                    super.widget.onResetRequest();
                   }, child: Text("Forgot your password?")),
 
                 ],

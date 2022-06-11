@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:innocart/login/reset/reset.dart';
 
 import 'package:innocart/signup/signup.dart';
 import 'package:innocart/login/login.dart';
@@ -16,24 +17,48 @@ class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => MainState();
 }
+enum AppState{
+  SIGNUP,LOGIN,RESET;
+}
+
 class MainState extends State<MyApp>{
-  bool signup = true;
+  AppState state = AppState.SIGNUP;
+
 
   @override
   Widget build(BuildContext context) {
+    late Widget current;
+    if(state == AppState.SIGNUP){
+      current = SignUpPage(title: "Signup",onTouched: (){
+        setState((){
+          state = AppState.LOGIN;
+        });
+
+      });
+    }
+    else if(state == AppState.LOGIN){
+      current = LogInPage(title: "Login",onTouched: (){
+        setState((){
+          state = AppState.SIGNUP;
+        });
+
+      }, onResetRequest: (){
+        setState((){
+          state = AppState.RESET;
+        });
+      });
+    }
+    else if(state == AppState.RESET){
+      current = ResetPage(onClick: (){
+        setState((){
+          state = AppState.LOGIN;
+        });
+
+      });
+    }
+
     return  MaterialApp(
-      home: signup?SignUpPage(title: "Signup",onTouched: (){
-        setState((){
-          signup = false;
-        });
-
-      }):LogInPage(title: "Login",onTouched: (){
-        setState((){
-          signup = true;
-        });
-
-      }),
-
+      home: current
     );
   }
 
