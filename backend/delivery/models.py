@@ -1,7 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
 class Delivery(models.Model):
     customerId = models.IntegerField(null=False, blank=False)
     angelId = models.IntegerField(null=False, blank=False)

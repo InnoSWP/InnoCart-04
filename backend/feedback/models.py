@@ -1,7 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
 class Feedback(models.Model):
     DEAL = (
         ('0', 'DELIVERY'),
