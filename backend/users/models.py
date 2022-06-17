@@ -3,8 +3,6 @@ from email.policy import default
 from django.db import models
 
 
-# Create your models here.
-
 class User(models.Model):
     token = models.CharField(null=True, max_length=50)
     passwordMd5hash = models.CharField(max_length=300, null=True, blank=True)
