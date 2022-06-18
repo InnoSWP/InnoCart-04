@@ -5,7 +5,8 @@ from .models import Order
 class OrderSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     customerId = serializers.IntegerField()
-    description = serializers.CharField()
+    name = serializers.CharField(max_length=100)
+    description = serializers.CharField(max_length=1000)
     expectedDeliveryTime = serializers.DateField()
     status = serializers.CharField(max_length=1)
     weight = serializers.DecimalField(decimal_places=2, max_digits=1000)
@@ -21,6 +22,7 @@ class OrderSerializer(serializers.Serializer):
     def update(self, instance, validated_data):
         instance.id = validated_data.get('id', instance.id)
         instance.customerId = validated_data.get('customerId', instance.customerId)
+        instance.name = validated_data.get('name', instance.name)
         instance.description = validated_data.get('description', instance.description)
         instance.expectedDeliveryTime = validated_data.get('expectedDeliveryTime', instance.expectedDeliveryTime)
         instance.status = validated_data.get('status', instance.status)
@@ -30,5 +32,17 @@ class OrderSerializer(serializers.Serializer):
         instance.address = validated_data.get('address', instance.address)
         instance.possibleAngelsIds = validated_data.get('possibleAngelsIds', instance.possibleAngelsIds)
         instance.picture = validated_data.get('picture', instance.picture)
+        instance.save()
+        return instance
+
+
+class OrderPutSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ['status', 'possibleAngelsIds']
+
+    def update(self, instance, validated_data):
+        instance.status = validated_data.get('status', instance.status)
+        instance.possibleAngelsIds = validated_data.get('possibleAngelsIds', instance.possibleAngelsIds)
         instance.save()
         return instance

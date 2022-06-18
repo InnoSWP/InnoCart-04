@@ -7,8 +7,8 @@ class Order(models.Model):
         ('1', 'IN_PROGRESS'),
         ('2', 'COMPLETED'),
     )
-    id = models.IntegerField(null=False, blank=False)
     customerId = models.IntegerField(null=False, blank=False)
+    name = models.CharField(max_length=100, null=False, blank=False)
     description = models.CharField(max_length=1000, null=True, blank=True, default='')
     expectedDeliveryTime = models.DateField(auto_now=True, null=False, blank=False)
     status = models.CharField(max_length=1, choices=STATUS, null=False, blank=False)
@@ -16,5 +16,5 @@ class Order(models.Model):
     cost = models.IntegerField(null=False, blank=False)
     fee = models.IntegerField(null=False, blank=False)
     address = models.CharField(max_length=200, null=False, blank=False)
-    possibleAngelsIds = models.JSONField(null=False, blank=False)
+    possibleAngelsIds = models.JSONField(null=False, blank=False, default=dict)
     picture = models.URLField(null=True, blank=True, default='')

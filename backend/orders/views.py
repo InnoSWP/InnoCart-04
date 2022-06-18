@@ -1,10 +1,8 @@
-#from django.shortcuts import render
-
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Order
-from .serializers import OrderSerializer
+from .serializers import OrderSerializer, OrderPutSerializer
 
 
 @api_view(['GET', 'POST'])
@@ -59,13 +57,9 @@ def order_detail(request, pk, format=None):
         serializer = OrderSerializer(order)
         return Response(serializer.data)
 
-# TODO
     elif request.method == 'PUT':
-        # request.data['status'] = status.id
-        serializer = OrderSerializer(order, data=request.data)
+        serializer = OrderPutSerializer(order, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            instance = serializer.data
-            instance['status'] = '1'
-            return Response(instance, status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
