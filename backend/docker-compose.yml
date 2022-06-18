@@ -27,6 +27,7 @@ services:
       - deliverymigrations
       - usersmigrations
       - feedbackmigrations
+      - ordersmigrations
   deliverymigrations:
     build: .
     command: python manage.py makemigrations delivery
@@ -40,5 +41,10 @@ services:
   feedbackmigrations:
     build: .
     command: python manage.py makemigrations feedback
+    volumes:
+      - .:/code
+  ordersmigrations:
+    build: .
+    command: python manage.py makemigrations orders
     volumes:
       - .:/code
