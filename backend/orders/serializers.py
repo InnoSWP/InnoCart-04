@@ -46,3 +46,15 @@ class OrderPutSerializer(serializers.ModelSerializer):
         instance.possibleAngelsIds = validated_data.get('possibleAngelsIds', instance.possibleAngelsIds)
         instance.save()
         return instance
+
+
+class AddAcceptedAngelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ['possibleAngelsIds']
+
+    def update(self, instance, validated_data):
+        instance.possibleAngelsIds = instance.possibleAngelsIds + validated_data.get('possibleAngelsIds',
+                                                                                     instance.possibleAngelsIds)
+        instance.save()
+        return instance

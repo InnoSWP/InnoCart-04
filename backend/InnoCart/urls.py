@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
-from orders.views import order_list, order_detail
+from orders.views import order_list, order_detail, add_accepted_angel
 from users.views import user_detail, sign_up, sign_in
 from delivery.views import delivery_detail, delivery_list
 from rest_framework.schemas import get_schema_view
@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('orders/', order_list, name='orders'),
     path('orders/<int:pk>', order_detail, name='order by id'),
+    path('orders/<int:pk>/add_angel', add_accepted_angel, name='order by id'),
     path('api_schema/', get_schema_view(title='API Schema', description='Guide for the REST API'), name='api_schema'),
     path('users/<int:pk>', user_detail, name='user by id'),
     path('api_schema/', get_schema_view(title='API Schema', description='Guide for the REST API'), name='api_schema'),
