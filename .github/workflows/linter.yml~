@@ -53,5 +53,5 @@ jobs:
 
       - name: Run tests
         run: cd backend &&
-          pip install -r requirements.txt &&
+          python install -r requirements.txt &&
           python manage.py test
