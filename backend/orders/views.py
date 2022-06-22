@@ -10,17 +10,20 @@ def order_list(request, format=None):
     token = request.GET.get('token')
     if token is None or token == '':
         return Response(status=status.HTTP_400_BAD_REQUEST)
+    customerId_query = request.GET.get('customerId')
     weightMin_query = request.GET.get('weightMin')
     weightMax_query = request.GET.get('weightMax')
     costMin_query = request.GET.get('costMin')
     costMax_query = request.GET.get('costMax')
     status_query = request.GET.get('status')
     if weightMax_query == '' or weightMin_query == '' or costMax_query == '' \
-            or costMin_query == '' or status_query == '':
+            or costMin_query == '' or status_query == '' or customerId_query == '':
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
     if request.method == 'GET':
         orders = Order.objects.all()
+        if customerId_query is not None:
+            orders = orders.filter(customerId=customerId_query)
         if status_query is not None:
             orders = orders.filter(status=status_query)
         if weightMax_query is not None:
