@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:innocart/network/addorderservice.dart';
 
 import '../homescreen.dart';
 import 'order.dart';
@@ -17,7 +18,7 @@ class AddOrderScreenState extends State<AddOrderScreen>{
 
 
 
-
+  late String name,time,address,price,tips,details;
   @override
   Widget build(BuildContext context) {
     double h = HomeScreenState.height, w = HomeScreenState.width;
@@ -32,7 +33,7 @@ class AddOrderScreenState extends State<AddOrderScreen>{
           onChanged: (String value) async{
 
             setState((){
-
+                name = value;
             });
           },
           decoration: const InputDecoration(
@@ -46,7 +47,7 @@ class AddOrderScreenState extends State<AddOrderScreen>{
           onChanged: (String value) async{
 
             setState((){
-
+                time = value;
             });
           },
           decoration: InputDecoration(
@@ -60,7 +61,7 @@ class AddOrderScreenState extends State<AddOrderScreen>{
           onChanged: (String value) async{
 
             setState((){
-
+              address = value;
             });
           },
           decoration:  InputDecoration(
@@ -75,7 +76,7 @@ class AddOrderScreenState extends State<AddOrderScreen>{
             onChanged: (String value) async{
 
               setState((){
-
+                  price = value;
               });
             },
             decoration: InputDecoration(
@@ -90,7 +91,7 @@ class AddOrderScreenState extends State<AddOrderScreen>{
             onChanged: (String value) async{
 
               setState((){
-
+                  tips = value;
               });
             },
             decoration: InputDecoration(
@@ -105,7 +106,7 @@ class AddOrderScreenState extends State<AddOrderScreen>{
           onChanged: (String value) async{
 
             setState((){
-
+                details = value;
             });
           },
           expands: true,
@@ -138,7 +139,10 @@ class AddOrderScreenState extends State<AddOrderScreen>{
             ),
             foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
           ),
-          onPressed: () { },
+          onPressed: () {
+            AddOrderService service = AddOrderService(HomeScreenState.id, name, details, time, "0", "50", int.parse(price), int.parse(tips), address, [], "https://www.mantruckandbus.com/fileadmin/_processed_/7/1/csm_Richard_von_Braunschweig_4e4e3bd591.jpeg");
+            var x = service.post();
+            },
           child: Text('Add Order'),
         )
         ],
@@ -146,6 +150,7 @@ class AddOrderScreenState extends State<AddOrderScreen>{
     ))
     ;
   }
+
 
 }
 

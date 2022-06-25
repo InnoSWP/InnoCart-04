@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:innocart/network/listordersservice.dart';
 import 'package:innocart/network/post.dart';
 import 'package:innocart/network/service.dart';
 import '../homescreen.dart';
@@ -17,38 +18,22 @@ class AvailableOrders extends StatefulWidget {
 class AvailableOrdersState extends State<AvailableOrders>{
 
 
-
-
+  List<OrderBox> orders = <OrderBox>[];
+  @override
+  void initState(){
+    listordersservice().getOrders((){setState((){});},orders,0);
+  }
   @override
   Widget build(BuildContext context) {
     double h = HomeScreenState.height, w = HomeScreenState.width;
     Size size = MediaQuery.of(context).size;
-    var orders = <Widget>[];
     return
       Column(
 
-        children: [
-          OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),
-        ]
+        children: orders
       );
   }
-  List<Post>? posts;
-  var isLoaded = false;
-  @override
-  void initState() {
-    super.initState();
 
-    //fetch data from API
-    getData();
-  }
-  getData() async {
-    posts = await RemoteService().getPosts();
-    if (posts != null) {
-      setState(() {
-        isLoaded = true;
-      });
-    }
-  }
 }
 
 

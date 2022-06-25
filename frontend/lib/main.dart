@@ -24,7 +24,7 @@ enum AppState{
 
 class MainState extends State<MyApp>{
   static AppState state = AppState.SIGNUP;
-
+  static String uuid = "";
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class MainState extends State<MyApp>{
     else if(state == AppState.LOGIN){
       current = LogInPage(title: "Login",onTouched: (){
         setState((){
-          state = AppState.SIGNUP;
+
         });
 
       }, onResetRequest: (){

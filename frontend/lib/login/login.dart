@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:innocart/network/loginservice.dart';
+
+import '../main.dart';
 
 
 class LogInPage extends StatefulWidget {
@@ -21,11 +24,12 @@ class LogInPage extends StatefulWidget {
 }
 class _LogInState extends State<LogInPage> {
   bool checked = false;
-  String email = "",password = "";
+  String id = "", password = "";
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     double height = size.height, width = size.width;
+
     return Scaffold(
 
         body: SingleChildScrollView(
@@ -63,6 +67,7 @@ class _LogInState extends State<LogInPage> {
                     ),),
                     TextButton(onPressed: () {
                       super.widget.onTouched();
+                      MainState.state = AppState.SIGNUP;
                     }, child: Text("Sign up"))
                   ]),
                   TextField(
@@ -70,7 +75,7 @@ class _LogInState extends State<LogInPage> {
                     onChanged: (String value) async{
 
                       setState((){
-                        password = value;
+                        id = value;
                       });
                     },
                     decoration: const InputDecoration(
@@ -97,7 +102,7 @@ class _LogInState extends State<LogInPage> {
                   Row(mainAxisAlignment: MainAxisAlignment.center,children: [
                     TextButton(
                       style: ButtonStyle(
-                        fixedSize: MaterialStateProperty.all(Size(300,50)),
+                        fixedSize: MaterialStateProperty.all(Size(width * 0.8,height * 0.06)),
                         backgroundColor: MaterialStateProperty.resolveWith<Color?>(
                               (Set<MaterialState> states) {
                             if (states.contains(MaterialState.hovered))
@@ -110,7 +115,14 @@ class _LogInState extends State<LogInPage> {
                         ),
                         foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                       ),
-                      onPressed: () { },
+                      onPressed: () {
+                          Loginservice loginService = Loginservice(id, password,super.widget.onTouched);
+                          loginService.post();
+                          // if(loginService.valid){
+                          //   MainState.state = AppState.CONNECTED;
+                          //   super.widget.onTouched();
+                          // }
+                      },
                       child: Text('Log in'),
                     )
                   ],)

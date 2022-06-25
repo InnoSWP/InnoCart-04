@@ -2,33 +2,39 @@
 import 'package:flutter/material.dart';
 
 import '../homescreen.dart';
+import '../network/listordersservice.dart';
 import 'order.dart';
 
-class AvailableOrders extends StatefulWidget {
-  AvailableOrders({Key? key, required this.title}) : super(key: key);
+class OrdersInProgress extends StatefulWidget {
+  OrdersInProgress({Key? key, required this.title}) : super(key: key);
   String title;
 
 
   @override
-  State<StatefulWidget> createState() => AvailableOrdersState();
+  State<StatefulWidget> createState() => OrdersInProgressState();
 }
 
-class AvailableOrdersState extends State<AvailableOrders>{
+class OrdersInProgressState extends State<OrdersInProgress>{
 
-
-
+  List<OrderBox> orders = <OrderBox>[];
+  @override
+  void initState(){
+    listordersservice().getOrders((){setState((){});},orders,1);
+  }
 
   @override
   Widget build(BuildContext context) {
     double h = HomeScreenState.height, w = HomeScreenState.width;
     Size size = MediaQuery.of(context).size;
-    return SizedBox(height: h * 310/ 400, child:
-    Column(
+    for(var x in orders){
+      print("test" + x.customerId.toString());
+    }
+    print(HomeScreenState.id);
+   //orders = orders.where((f) => (f.customerId == HomeScreenState.id)).toList();
 
-      children: [
-        OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),OrderBox(),
-      ],
-    )
+    return
+    Column(
+      children: orders
     );
   }
 

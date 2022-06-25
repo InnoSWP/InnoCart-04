@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:innocart/homescreen.dart';
 import 'package:innocart/main.dart';
+import 'package:innocart/network/loginservice.dart';
+import 'package:innocart/network/signupservice.dart';
 import 'package:innocart/signup/see.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -24,12 +27,14 @@ class _SignUpState extends State<SignUpPage> {
   bool customer = true;
   String email = "",password = "",name = "", phonenumber = "";
   bool showPassword = false;
+  bool checkinfo = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     double height = size.height, width = size.width;
     Color buttonsColor1 = Color(0xffc3c3d3);
     Color buttonsColor2 = Color(0xff3b42f0);
+    HomeScreenState.angel = !customer;
     Widget o = See(onClick: (){setState((){
       showPassword = ! showPassword;
       });
@@ -219,15 +224,18 @@ class _SignUpState extends State<SignUpPage> {
                         ),
                         onPressed: () {
                           bool valid = true;
-                          if(!RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$').hasMatch(email))valid = false;
-                          if(!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(phonenumber))valid = false;
-                         // if(!RegExp(r'^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$').hasMatch(password))valid = false;
-
-                          if(valid == false)showAlertDialog(context,"Please verify your information");
-                          else {
-                            MainState.state = AppState.CONNECTED;
-                            super.widget.onTouched();
+                          if(checkinfo) {
+                            if (!RegExp(
+                                r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                                .hasMatch(email)) valid = false;
+                            if (!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(
+                                phonenumber)) valid = false;
+                            // if(!RegExp(r'^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$').hasMatch(password))valid = false;
                           }
+                          Signupservice service = Signupservice(password,name,phonenumber,email,20,4.5,widget.onTouched);
+                          service.post();
+                      if(valid == false)showAlertDialog(context,"Please verify your information");
+
                         },
                         child: Text('Sign up', textScaleFactor: 1.2,),
                       )

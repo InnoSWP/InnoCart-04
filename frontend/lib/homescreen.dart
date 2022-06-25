@@ -1,8 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:innocart/subscreens/addorder.dart';
+import 'package:innocart/subscreens/angellist.dart';
 import 'package:innocart/subscreens/availableorders.dart';
+import 'package:innocart/subscreens/deliverystatus.dart';
 import 'package:innocart/subscreens/order.dart';
+import 'package:innocart/subscreens/ordersinprogress.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,18 +17,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen>{
+  static String token = "";
+  static int id = -1;
   List<String> titles = <String>["Available Orders","Support Page","Order History","Profile","Add an Order"];
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  bool angel = false;
+  static bool angel = false;
   static List<Widget> _widgetOptionsAngel = <Widget>[
     AvailableOrders(title: "title"),
-    Text(
-      'Support Screen\nto be done',
-      style: optionStyle,
-    ),
-    AvailableOrders(title: "test"),
+   Text("TeST"),
+    OrdersInProgress(title: "test"),
     Text(
       'Profile Screen\nto be done'
           ,
@@ -33,12 +35,8 @@ class HomeScreenState extends State<HomeScreen>{
     )
   ];
   static List<Widget> _widgetOptionsCustomer = <Widget>[
-    AddOrderScreen(title: "test"),
-    Text(
-      'Support Screen\nto be done',
-      style: optionStyle,
-    ),
-    AvailableOrders(title: "test"),
+    AddOrderScreen(title: "test"),Text("TEST"),
+    OrdersInProgress(title: "test"),
     Text(
       'Profile Screen\nto be done',
       style: optionStyle,
@@ -58,6 +56,7 @@ class HomeScreenState extends State<HomeScreen>{
     Size size = MediaQuery.of(context).size;
     double h = size.height, w = size.width;
     height = h;width = w;
+    print(token);
     return Scaffold(
 
     body: Column(children: [
@@ -124,11 +123,3 @@ class HomeScreenState extends State<HomeScreen>{
 }
 
 
-class User{
-  late String name,email;
-  late FileImage picture;
-  String id;
-  User(this.id){
-
-  }
-}
