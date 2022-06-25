@@ -41,6 +41,7 @@ class UserSerializer(serializers.Serializer):
 
 class UserLoginSerializer(serializers.ModelSerializer):
     # to accept either username or email
+    id = serializers.IntegerField(read_only=True)
     name = serializers.CharField()
     token = serializers.CharField(required=False, read_only=True)
 
@@ -68,16 +69,19 @@ class UserLoginSerializer(serializers.ModelSerializer):
             user = User.objects.get(name=name)
         data['token'] = uuid4()
         user.token = data['token']
+        data['id'] = user.id
         user.save()
         return data
 
     class Meta:
         model = User
         fields = (
+            'id',
             'name',
             'token',
         )
 
         read_only_fields = (
+            'id',
             'token',
         )
