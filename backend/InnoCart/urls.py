@@ -27,10 +27,8 @@ urlpatterns = [
     path('orders/<int:pk>', order_detail, name='order by id'),
     path('api_schema/', get_schema_view(title='API Schema', description='Guide for the REST API'), name='api_schema'),
     path('users/<int:pk>', user_detail, name='user by id'),
-    path('api_schema/', get_schema_view(title='API Schema', description='Guide for the REST API'), name='api_schema'),
     path('sign_up/', sign_up, name='sign_up'),
     path('sign_in/', sign_in, name='sign_in'),
-    path('api_schema/', get_schema_view(title='API Schema', description='Guide for the REST API'), name='api_schema'),
     path('delivery/', delivery_list, name='delivery'),
     path('delivery/<int:pk>', delivery_detail, name='delivery by id'),
 ]

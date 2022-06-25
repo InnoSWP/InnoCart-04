@@ -41,6 +41,12 @@ jobs:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
 
+      - name: Run tests
+        run: cd backend &&
+          pip install -r requirements.txt &&
+          python manage.py test
+
+
       ################################
       # Run Linter against code base #
       ################################
@@ -51,7 +57,3 @@ jobs:
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run tests
-        run: cd backend &&
-          pip install -r requirements.txt &&
-          python manage.py test
