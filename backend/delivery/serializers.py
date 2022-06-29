@@ -7,7 +7,6 @@ class DeliverySerializer(serializers.Serializer):
     customerId = serializers.IntegerField()
     angelId = serializers.IntegerField()
     orderId = serializers.IntegerField()
-    estimatedTime = serializers.TimeField()
     customerConfirmation = serializers.BooleanField()
     angelConfirmation = serializers.BooleanField()
 
@@ -18,7 +17,6 @@ class DeliverySerializer(serializers.Serializer):
         instance.customerId = validated_data.get('customerId', instance.customerId)
         instance.angelId = validated_data.get('angelId', instance.angelId)
         instance.orderId = validated_data.get('orderId', instance.orderId)
-        instance.estimatedTime = validated_data.get('estimatedTime', instance.estimatedTime)
         instance.customerConfirmation = validated_data.get('customerConfirmation', instance.customerConfirmation)
         instance.angelConfirmation = validated_data.get('angelConfirmation', instance.angelConfirmation)
         instance.save()

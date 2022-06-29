@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Delivery
 from .serializers import DeliverySerializer, DeliveryPutSerializer
+from users.models import User
 
 
 @api_view(['GET', 'POST'])
@@ -27,6 +28,9 @@ def delivery_list(request, format=None):
         serializer = DeliverySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            user = User.objects.all().get(pk=serializer.data['angelId'])
+            user.deliveredOrdersHistoryIds.append(serializer.data['orderId'])
+            user.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

@@ -7,7 +7,7 @@ class OrderSerializer(serializers.Serializer):
     customerId = serializers.IntegerField()
     name = serializers.CharField(max_length=100)
     description = serializers.CharField(max_length=1000)
-    expectedDeliveryTime = serializers.DateField()
+    expectedDeliveryTime = serializers.TimeField()
     status = serializers.CharField(max_length=1)
     weight = serializers.DecimalField(decimal_places=2, max_digits=1000)
     cost = serializers.IntegerField()
