@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Order
 from .serializers import OrderSerializer, OrderPutSerializer
+from users.models import User
 
 
 @api_view(['GET', 'POST'])
@@ -41,6 +42,9 @@ def order_list(request, format=None):
         serializer = OrderSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            user = User.objects.all().get(pk=serializer.data['customerId'])
+            user.createdOrdersHistoryIds.append(serializer.data['id'])
+            user.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

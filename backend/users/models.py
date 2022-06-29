@@ -1,5 +1,3 @@
-from array import array
-from email.policy import default
 from django.db import models
 
 
@@ -11,5 +9,5 @@ class User(models.Model):
     email = models.CharField(max_length=200, null=False, blank=False)
     age = models.IntegerField(null=False, blank=False)
     deliveryRate = models.DecimalField(decimal_places=1, max_digits=1000, null=False, blank=False, default=0)
-    createdOrdersHistoryIds = models.JSONField(null=True, blank=True, default=dict)
-    deliveredOrdersHistoryIds = models.JSONField(null=True, blank=True, default=dict)
+    createdOrdersHistoryIds = models.JSONField(null=True, blank=True, default=list)
+    deliveredOrdersHistoryIds = models.JSONField(null=True, blank=True, default=list)

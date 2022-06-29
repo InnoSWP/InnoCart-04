@@ -23,3 +23,16 @@ class DeliverySerializer(serializers.Serializer):
         instance.angelConfirmation = validated_data.get('angelConfirmation', instance.angelConfirmation)
         instance.save()
         return instance
+
+
+class DeliveryPutSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Delivery
+        fields = ['customerConfirmation', 'angelConfirmation']
+        extra_kwargs = {'customerConfirmation': {'required': False}, 'angelConfirmation': {'required': False}}
+
+    def update(self, instance, validated_data):
+        instance.customerConfirmation = validated_data.get('customerConfirmation', instance.customerConfirmation)
+        instance.angelConfirmation = validated_data.get('angelConfirmation', instance.angelConfirmation)
+        instance.save()
+        return instance

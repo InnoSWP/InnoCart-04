@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import Order
-from django.db import models
 
 
 class OrderSerializer(serializers.Serializer):
@@ -38,7 +37,6 @@ class OrderSerializer(serializers.Serializer):
 
 
 class OrderPutSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Order
         fields = ['status', 'possibleAngelsIds']
@@ -46,6 +44,6 @@ class OrderPutSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         instance.status = validated_data.get('status', instance.status)
-        instance.possibleAngelsIds = instance.possibleAngelsIds + validated_data.get('possibleAngelsIds', instance.possibleAngelsIds)
+        instance.possibleAngelsIds = validated_data.get('possibleAngelsIds', instance.possibleAngelsIds)
         instance.save()
         return instance
