@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from .models import User
 from uuid import uuid4
-from django.db.models import Q
 from django.core.exceptions import ValidationError
 
 
@@ -43,6 +42,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
     # to accept either username or email
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField()
+    passwordMd5hash = serializers.CharField(write_only=True)
     token = serializers.CharField(required=False, read_only=True)
 
     def validate(self, data):
@@ -54,22 +54,13 @@ class UserLoginSerializer(serializers.ModelSerializer):
         user = None
         # if the email has been passed
         if '@' in name:
-            user = User.objects.filter(
-                Q(email=name) &
-                Q(passwordMd5hash=passwordMd5hash)
-                ).distinct()
-            if not user.exists():
-                raise ValidationError("User credentials are not correct.")
-            user = User.objects.get(email=name)
+            user = User.objects.get(email=name, passwordMd5hash=passwordMd5hash)
         else:
-            user = User.objects.filter(
-                Q(name=name) &
-                Q(passwordMd5hash=passwordMd5hash)
-            ).distinct()
-            user = User.objects.get(name=name)
+            user = User.objects.get(phoneNumber=name, passwordMd5hash=passwordMd5hash)
         data['token'] = uuid4()
         user.token = data['token']
         data['id'] = user.id
+        data['name'] = user.name
         user.save()
         return data
 
@@ -79,6 +70,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'token',
+            'passwordMd5hash',
         )
 
         read_only_fields = (
