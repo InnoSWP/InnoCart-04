@@ -9,6 +9,10 @@ An application that connects Innopolis residents (customers) with people moving 
 
 Customers save time and money for the road & Angels make money while they are doing their own business.
 
+## Demo Video
+
+https://user-images.githubusercontent.com/54815296/177011726-4874507d-2948-45c5-99f6-c23950cdd50c.mp4
+
 ## Implemented features
 #### Common
 * Log in/Log out
@@ -44,12 +48,11 @@ Finally, you can run a server:
 ```bash
 $ python3 manage.py runserver
 ```
+## How to use
+After installation you can sign up and use the aplication either like a customer or an Angel. You can do all actions from feature list.
+
 ## Figma design
 <img src="https://raw.githubusercontent.com/InnoSWP/InnoCart-04/master/images/Frame.png" width="600">
-
-## Demo Video
-
-https://user-images.githubusercontent.com/54815296/177011726-4874507d-2948-45c5-99f6-c23950cdd50c.mp4
 
 
 ## Technology stack
