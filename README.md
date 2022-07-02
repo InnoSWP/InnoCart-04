@@ -9,6 +9,10 @@ An application that connects Innopolis residents (customers) with people moving 
 
 Customers save time and money for the road & Angels make money while they are doing their own business.
 
+## Demo Video
+
+https://user-images.githubusercontent.com/54815296/177011726-4874507d-2948-45c5-99f6-c23950cdd50c.mp4
+
 ## Implemented features
 #### Common
 * Log in/Log out
@@ -52,7 +56,6 @@ After installation you can sign up and use the aplication either like a customer
 
 ## Demo Video
 https://user-images.githubusercontent.com/54815296/177011308-ec733b2a-b0f0-45d7-a166-1a3f60ae25bb.mp4
-
 
 ## Technology stack
 * Django
