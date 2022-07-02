@@ -44,6 +44,9 @@ Finally, you can run a server:
 ```bash
 $ python3 manage.py runserver
 ```
+## How to use
+After installation you can sign up and use the aplication either like a customer or an Angel. You can do all actions from feature list.
+
 ## Figma design
 <img src="https://raw.githubusercontent.com/InnoSWP/InnoCart-04/master/images/Frame.png" width="600">
 
