@@ -3,7 +3,12 @@
 # InnoCart project 
 
 
-[![License](https://img.shields.io/github/license/InnoSWP/InnoCart?color=violet&logoColor=red&style=for-the-badge)](https://github.com/InnoSWP/InnoCart-04/blob/master/LICENSE)
+![GitHub](https://img.shields.io/github/license/InnoSWP/InnoCart-04)
+![GitHub contributors](https://img.shields.io/github/contributors/InnoSWP/InnoCart-04)
+![GitHub issues](https://img.shields.io/github/issues/InnoSWP/InnoCart-04)
+![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/InnoSWP/InnoCart-04)
+![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/InnoSWP/InnoCart-04?include_prereleases)
+
 
 An application that connects Innopolis residents (customers) with people moving around Kazan (Angels). Customer can order some products (medics, food, ..) from Kazan and Angels would deliver it heading their way to Innopolis. 
 
@@ -53,9 +58,6 @@ After installation you can sign up and use the aplication either like a customer
 
 ## Figma design
 <img src="https://raw.githubusercontent.com/InnoSWP/InnoCart-04/master/images/Frame.png" width="600">
-
-## Demo Video
-https://user-images.githubusercontent.com/54815296/177011308-ec733b2a-b0f0-45d7-a166-1a3f60ae25bb.mp4
 
 ## Technology stack
 * Django
