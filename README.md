@@ -48,8 +48,7 @@ $ python3 manage.py runserver
 <img src="https://raw.githubusercontent.com/InnoSWP/InnoCart-04/master/images/Frame.png" width="600">
 
 ## Demo Video
-
-https://user-images.githubusercontent.com/54815296/177011726-4874507d-2948-45c5-99f6-c23950cdd50c.mp4
+https://user-images.githubusercontent.com/54815296/177011308-ec733b2a-b0f0-45d7-a166-1a3f60ae25bb.mp4
 
 
 ## Technology stack
