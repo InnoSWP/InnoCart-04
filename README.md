@@ -1,4 +1,7 @@
-# InnoCart project
+<img src="https://raw.githubusercontent.com/InnoSWP/InnoCart-04/912ebc85c8e8acee39a292d8a3c35e3cf4368d18/images/Untitled-2%20(2).jpg" width="200">
+
+# InnoCart project 
+
 
 [![License](https://img.shields.io/github/license/InnoSWP/InnoCart?color=violet&logoColor=red&style=for-the-badge)](https://github.com/InnoSWP/InnoCart-04/blob/master/LICENSE)
 
@@ -21,9 +24,6 @@ Customers save time and money for the road & Angels make money while they are do
 * View delivery status
 * Confirm the order
 
-##Figma design
-
-
 ## How to run?
 First, clone the repository and go to the backend directory:
 ```bash
@@ -44,8 +44,11 @@ Finally, you can run a server:
 ```bash
 $ python3 manage.py runserver
 ```
+## Figma design
+<img src="https://raw.githubusercontent.com/InnoSWP/InnoCart-04/master/images/Frame.png" width="600">
 
-## Technolohy stack
+
+## Technology stack
 * Django
 * Django Rest Framework
 * Flutter
@@ -56,11 +59,8 @@ $ python3 manage.py runserver
 * Linter
 * SonarCloud
 
-## Useful links
+## Additional links
 * [Wiki](https://github.com/InnoSWP/InnoCart-04/wiki)
 * [REST API](https://app.swaggerhub.com/apis/Innopolis-University1/InnoCart/1.0.0-oas3)
 * [Backlog](https://github.com/orgs/InnoSWP/projects/17)
-* [Figma design](https://www.figma.com/file/uNcYX3G4SNXs85SRhC1si3/InnoCart-UI?node-id=0%3A1)
-
-
 
