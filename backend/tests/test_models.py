@@ -8,7 +8,7 @@ from users.models import User
 class DeliveryModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        Delivery.objects.create(customerId=1, angelId=23, orderId=2, estimatedTime='20:00',
+        Delivery.objects.create(customerId=1, angelId=23, orderId=2,
                                 customerConfirmation=True, angelConfirmation=True)
 
     def test_customer_id_label(self):
@@ -25,11 +25,6 @@ class DeliveryModelTest(TestCase):
         delivery = Delivery.objects.get(id=1)
         field_label = delivery._meta.get_field('orderId').verbose_name
         self.assertEquals(field_label, 'orderId')
-
-    def test_estimated_time_label(self):
-        delivery = Delivery.objects.get(id=1)
-        field_label = delivery._meta.get_field('estimatedTime').verbose_name
-        self.assertEquals(field_label, 'estimatedTime')
 
     def test_customer_confirmation_label(self):
         delivery = Delivery.objects.get(id=1)
@@ -77,7 +72,7 @@ class OrderModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         Order.objects.create(customerId=12, name='Del', description='seven years bad luck',
-                             expectedDeliveryTime='04:00', status='0', weight='100', cost='100',
+                             expectedDeliveryTime='04:00:00', status='0', weight='100', cost='100',
                              fee='50', address='Inno basement', possibleAngelsIds=[123, 456],
                              picture='https://qwerty.com')
 
@@ -140,6 +135,11 @@ class OrderModelTest(TestCase):
         order = Order.objects.get(id=1)
         max_length = order._meta.get_field('name').max_length
         self.assertEquals(max_length, 100)
+
+    def test_time_max_length(self):
+        order = Order.objects.get(id=1)
+        max_length = order._meta.get_field('expectedDeliveryTime').max_length
+        self.assertEquals(max_length, 50)
 
     def test_description_max_length(self):
         order = Order.objects.get(id=1)
