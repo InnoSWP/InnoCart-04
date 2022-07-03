@@ -136,6 +136,11 @@ class OrderModelTest(TestCase):
         max_length = order._meta.get_field('name').max_length
         self.assertEquals(max_length, 100)
 
+    def test_time_max_length(self):
+        order = Order.objects.get(id=1)
+        max_length = order._meta.get_field('expectedDeliveryTime').max_length
+        self.assertEquals(max_length, 50)
+
     def test_description_max_length(self):
         order = Order.objects.get(id=1)
         max_length = order._meta.get_field('description').max_length

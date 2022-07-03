@@ -10,7 +10,7 @@ class Order(models.Model):
     customerId = models.IntegerField(null=False, blank=False)
     name = models.CharField(max_length=100, null=False, blank=False)
     description = models.CharField(max_length=1000, null=True, blank=True, default='')
-    expectedDeliveryTime = models.TimeField(null=False, blank=False)
+    expectedDeliveryTime = models.CharField(max_length=50, null=False, blank=False)
     status = models.CharField(max_length=1, choices=STATUS, null=False, blank=False)
     weight = models.DecimalField(decimal_places=2, max_digits=1000, null=False, blank=False)
     cost = models.IntegerField(null=False, blank=False)
