@@ -16,7 +16,7 @@ Customers save time and money for the road & Angels make money while they are do
 
 ## Demo Video
 
-https://user-images.githubusercontent.com/54815296/177011726-4874507d-2948-45c5-99f6-c23950cdd50c.mp4
+https://drive.google.com/file/d/18EpAnUjUA7nOSiD0BtouWZ14MJ6CG9fx/view?usp=sharing
 
 ## Implemented features
 #### Common
